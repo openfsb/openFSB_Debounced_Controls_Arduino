@@ -11,7 +11,13 @@ openFSB Debounced Controls is a library for Arduino and compatibles with classes
 Documentation about this library can be found online at <https://docs-debounced-controls-arduino.openfsb.org>.
 
 ## Download and installation
-Download the library [here](https://github.com/openfsb/openFSB_Debounced_Controls_Arduino/archive/master.zip) and copy the directory *openFSB_Debounced_Controls* to the Arduino libraries directory. If you are using the Arduino IDE, start the IDE again to load the keywords and examples.
+Download the zip file from the [latest release overview](https://github.com/openfsb/openFSB_Debounced_Controls_Arduino/releases/latest).
+
+Arduino IDE:
+Copy the directory *openFSB_Debounced_Controls* from the zip file to the Arduino libraries directory and start the IDE again to load the keywords and examples.
+
+PlatformIO:
+Copy the directory *openFSB_Debounced_Controls* from the zip file to your project or include directory. This library is PlatformIO compatible.
 
 ## Examples
 In the Arduino IDE go to the *File->Examples->openFSN Debounced Controls* menu and choose one of the examples.
