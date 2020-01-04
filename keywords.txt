@@ -1,0 +1,42 @@
+#######################################
+# Syntax Coloring Map For SimBricks_AirManager
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+OpenFSBDebouncer	KEYWORD1
+OpenFSBButton	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setOnState	KEYWORD2
+getOnState	KEYWORD2
+setIntervalMS	KEYWORD2
+getIntervalMS	KEYWORD2
+getValue	KEYWORD2
+rose	KEYWORD2
+fell	KEYWORD2
+isLow	KEYWORD2
+isHigh	KEYWORD2
+update	KEYWORD2
+read	KEYWORD2
+isOn	KEYWORD2
+isOff	KEYWORD2
+switchingOn	KEYWORD2
+switchingOff	KEYWORD2
+switched	KEYWORD2
+isPressed	KEYWORD2
+isReleased	KEYWORD2
+press	KEYWORD2
+release	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+#CONSTANT	LITERAL1
