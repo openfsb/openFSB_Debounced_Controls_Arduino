@@ -3,12 +3,12 @@ openFSB Debounced Controls is a library for Arduino and compatibles with classes
 
 ## Classes
 * OpenFSBButton
-* OpenFSBEncoder
-* OpenFSBSwitch
+* OpenFSBEncoder (not yet available)
+* OpenFSBSwitch (not yet available)
 * OpenFSBDebouncer (the general debouncer)
 
 ## Documentation
-Documentation about this library can be found online at <https://docs-debounced-controls-arduino.openfsb.org>.
+Documentation about this library can be found online at <https://docs-debounced-controls-arduino.openfsb.org>{:target="_blank"}.
 
 ## Download and installation
 Download the zip file from the [latest release overview](https://github.com/openfsb/openFSB_Debounced_Controls_Arduino/releases/latest).
