@@ -162,7 +162,7 @@ setIntervalMS( intervalMS )
 getIntervalMS()
  Get the stable interval time.
 
- .. function:: uint16_t getIntervalMS()
+ .. function:: uint16_t OpenFSBButton::getIntervalMS()
 
  Returns: the stable interval time in milliseconds.
 
@@ -176,7 +176,7 @@ getIntervalMS()
 getValue()
  Get the debounced pin state.
 
- .. function:: int getValue()
+ .. function:: int OpenFSBButton::getValue()
 
  Returns: the debounced pin state ``LOW`` or ''HIGH``.
  
@@ -190,7 +190,7 @@ getValue()
 press()
  Tells if the state is changed from `released' to `pressed`.
 
- .. function:: bool press()
+ .. function:: bool OpenFSBButton::press()
 
  Returns: ``true`` or ``false``
 
@@ -204,7 +204,7 @@ press()
 release()
  Tells if the state is changed from `pressed` to `released`.
 
- .. function:: bool release()
+ .. function:: bool OpenFSBButton::release()
 
  Returns: ``true`` or ``false``
 
@@ -218,7 +218,7 @@ release()
 isPressed()
  Tells if the state is `pressed`.
 
- .. function:: bool isPressed()
+ .. function:: bool OpenFSBButton::isPressed()
 
  Returns: ``true`` if ``onState`` and the debounced state are equal otherwise ``false``
 
@@ -232,7 +232,7 @@ isPressed()
 isReleased()
  Tells if the state is `released`.
 
- .. function:: bool isReleased()
+ .. function:: bool OpenFSBButton::isReleased()
 
  Returns: ``true`` if ``onState`` and the debounced state are not equal otherwise ``false``
 
@@ -246,7 +246,7 @@ isReleased()
 rose()
  Tells if the debounced state is changed from ``LOW`` to ``HIGH``.
 
- .. function:: bool rose()
+ .. function:: bool OpenFSBButton::rose()
 
  Returns: ``true`` or ``false``
  
@@ -260,7 +260,7 @@ rose()
 fell()
   Tells if the debounced state is changed from ``HIGH`` to ``LOW``.
 
- .. function:: bool fell()
+ .. function:: bool OpenFSBButton::fell()
 
  Returns: ``true`` or ``false``
 
@@ -274,7 +274,7 @@ fell()
 isLow()
  Tells if the debounced state is ``LOW``.
 
- .. function:: bool isLow()
+ .. function:: bool OpenFSBButton::isLow()
 
  Returns: ``true`` or ``false``
 
@@ -288,7 +288,7 @@ isLow()
 isHigh()
  Tells if the debounced state is ``HIGH``.
 
- .. function:: bool isHigh()
+ .. function:: bool OpenFSBButton::isHigh()
 
  Returns: ``true`` or ``false``
 
@@ -302,7 +302,7 @@ isHigh()
 update()
  Updates the state. This methods should be called before checking the new state. Best way is to include the update in the loop.
 
- .. function:: void update()
+ .. function:: void OpenFSBButton::update()
 
  Example:
  
