@@ -82,7 +82,7 @@ class OpenFSBDebouncer {
 		unsigned long  rtimer_start_time_ms  = 0;
 
 	friend class OpenFSBButton;
-	//friend class OpenFSBEncoder;   * for future use *
+	friend class OpenFSBRotaryEncoder;
 	//friend class OpenFSBSwitch;    * for future use *
 };
 

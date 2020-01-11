@@ -9,11 +9,11 @@ Table of Contents
 .. toctree::
 
    OpenFSBButton
+   OpenFSBRotaryEncoder
    OpenFSBDebouncer
 
 
 Future classes
 --------------
 
-* OpenFSBRotaryEncoder: handles quadrature rotary encoders.
 * OpenFSBSwitch: handles (multi-position) switches .

@@ -3,12 +3,12 @@ openFSB Debounced Controls is a library for Arduino and compatibles with classes
 
 ## Classes
 * OpenFSBButton
-* OpenFSBEncoder (not yet available)
+* OpenFSBRotaryEncoder
 * OpenFSBSwitch (not yet available)
 * OpenFSBDebouncer (the general debouncer)
 
 ## Documentation
-Documentation about this library can be found online at <https://docs-debounced-controls-arduino.openfsb.org>{:target="_blank"}.
+Documentation about this library can be found online at <a href="https://docs-debounced-controls-arduino.openfsb.org" target="_blank">https://docs-debounced-controls-arduino.openfsb.org</a>.
 
 ## Download and installation
 Download the zip file from the [latest release overview](https://github.com/openfsb/openFSB_Debounced_Controls_Arduino/releases/latest).
@@ -24,8 +24,8 @@ In the Arduino IDE go to the *File->Examples->openFSN Debounced Controls* menu a
 
 ## (Future) releases
 * 0.1: openFSBButton and openHSBDebouncer
-* 0.2: Add OpenFSBEncoder
-* 0.3: Add OpenFSBSwitch
-* 1.0: Add double press and longpress to OpenFSBButton
+* 0.2: Add OpenFSBRotaryEncoder
+* 1.0: Add OpenFSBSwitch
+* 1.1: Add double press and longpress to OpenFSBButton
 
 For releases go to the [release overview](https://github.com/openfsb/openFSB_Debounced_Controls_Arduino/releases).
