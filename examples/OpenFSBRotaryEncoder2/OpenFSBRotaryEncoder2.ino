@@ -21,7 +21,8 @@ OpenFSBRotaryEncoder encoder( ENCODER_PIN_A, ENCODER_PIN_B );  // Defaults: mode
 
 
 void setup() {
-      Serial.begin( 115200 );
+  Serial.begin( 115200 );
+  encoder.begin();
 }
 
 

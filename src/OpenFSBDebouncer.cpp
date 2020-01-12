@@ -14,22 +14,54 @@
 OpenFSBDebouncer::OpenFSBDebouncer() {}
 
 OpenFSBDebouncer::OpenFSBDebouncer( uint8_t pin ) {
-	initDebouncer( pin, pin_mode, getState( ON_STATE ) );
+	setPin( pin );
 }
 
 OpenFSBDebouncer::OpenFSBDebouncer( uint8_t pin, uint8_t mode ) {
-	initDebouncer( pin, mode, getState( ON_STATE ) );
+	setPin( pin );
+	setMode( mode );
 }
 
 OpenFSBDebouncer::OpenFSBDebouncer( uint8_t pin, uint8_t mode, uint8_t onState ) {
-	initDebouncer( pin, mode, onState );
+	setPin( pin );
+	setMode( mode );
+	setOnState( onState );
 }
 
 
 
 
 // METHODS
-uint8_t  OpenFSBDebouncer::getOnState() {
+void OpenFSBDebouncer::begin() {
+	if ( initialized ) return;  // already initialized
+	if ( !pin_set ) return;     // pin number not set, unable to initialize
+
+	switch ( pin_mode ) {
+		case PULLUP:
+			pinMode( pin_number, INPUT_PULLUP );
+			setOnState( LOW );
+			initialized = true;
+			break;
+#ifdef PULLDOWN
+		case PULLDOWN:
+			pinMode( pin_number, INPUT_PULLDOWN );
+			setOnState( HIGH );
+			initialized = true;
+			break;
+#endif
+		case EXTERNAL:
+			pinMode( pin_number, INPUT );
+			initialized = true;
+			break;
+		default:  // wrong mode
+				break;
+	}
+
+	resetRtimer();
+}
+
+
+uint8_t OpenFSBDebouncer::getOnState() {
 	return getState( ON_STATE );
 }
 
@@ -114,37 +146,20 @@ void OpenFSBDebouncer::update() {
 
 
 // PRIVATE METHODS
-void OpenFSBDebouncer::initDebouncer( uint8_t pin, uint8_t mode, uint8_t onState ) {
+void OpenFSBDebouncer::setPin( uint8_t pin ) {
+	if ( initialized ) return;  // already initialized
 	pin_number = pin;
+	pin_set = true;
+}
+
+void OpenFSBDebouncer::setMode( uint8_t mode ) {
+	if ( initialized ) return;  // already initialized
 	pin_mode = mode;
-
-	switch ( pin_mode ) {
-		case PULLUP:
-			pinMode( pin_number, INPUT_PULLUP );
-			setOnState( LOW );
-			initialized = true;
-			break;
-#ifdef PULLDOWN
-		case PULLDOWN:
-			pinMode( pin_number, INPUT_PULLDOWN );
-			setOnState( HIGH );
-			initialized = true;
-			break;
-#endif
-		case EXTERNAL:
-			pinMode( pin_number, INPUT );
-			setState( ON_STATE );
-			initialized = true;
-			break;
-		default:  // wrong mode
-				break;
-	}
-
-	resetRtimer();
 }
 
 
 void OpenFSBDebouncer::setOnState( uint8_t onState ) {
+	if ( initialized ) return;  // already initialized
 	if ( pin_mode == EXTERNAL ) {
 		if (onState == HIGH) setState( ON_STATE );
 		if (onState == LOW)  unsetState( ON_STATE );

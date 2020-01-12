@@ -12,20 +12,35 @@
 
 // CONSTRUCTORS
 OpenFSBRotaryEncoder::OpenFSBRotaryEncoder(  uint8_t pinA, uint8_t pinB  ) {
-	initRotaryEncoder( pinA, pinB, debouncerA.pin_mode, debouncerA.getState( ON_STATE ) );
+	debouncerA.setPin( pinA );
+	debouncerB.setPin( pinB );
 }
 
 OpenFSBRotaryEncoder::OpenFSBRotaryEncoder( uint8_t pinA, uint8_t pinB, uint8_t mode ) {
-	initRotaryEncoder( pinA, pinB, mode, debouncerA.getState( ON_STATE ) );
+	debouncerA.setPin( pinA );
+	debouncerB.setPin( pinB );
+	debouncerA.setMode( mode );
+	debouncerB.setMode( mode );
 }
 
 OpenFSBRotaryEncoder::OpenFSBRotaryEncoder( uint8_t pinA, uint8_t pinB, uint8_t mode, uint8_t onState ) {
-	initRotaryEncoder( pinA, pinB, mode, onState );
+	debouncerA.setPin( pinA );
+	debouncerB.setPin( pinB );
+	debouncerA.setMode( mode );
+	debouncerB.setMode( mode );
+	debouncerA.setOnState( onState  );
+	debouncerB.setOnState( onState  );
 }
 
 
 
 // METHODS
+void OpenFSBRotaryEncoder::begin() {
+	debouncerA.begin();
+	debouncerB.begin();
+}
+
+
 uint8_t OpenFSBRotaryEncoder::getOnState() {
 	return debouncerA.getOnState();
 }
@@ -129,12 +144,6 @@ long OpenFSBRotaryEncoder::read() {
 
 
 // PRIVATE METHODS
-void OpenFSBRotaryEncoder::initRotaryEncoder( uint8_t pinA, uint8_t pinB, uint8_t mode, uint8_t onState ) {
-	debouncerA.initDebouncer( pinA, mode, onState );
-	debouncerB.initDebouncer( pinB, mode, onState );
-}
-
-
 void OpenFSBRotaryEncoder::updateDirection() {
 	if ( sequence == 0b11000001 ) {         // both pins read ("11") and rotating CW ("01")
 		direction = ROTARY_ENCODER_DIRECTION_CW;

@@ -19,6 +19,7 @@ class OpenFSBRotaryEncoder {
 		OpenFSBRotaryEncoder( uint8_t pinA, uint8_t pinB, uint8_t mode, uint8_t onState );
 
 		//Methods
+		void     begin();
 		uint8_t  getOnState();
 		void     setIntervalMS( uint16_t intervalMS );
 		uint16_t getIntervalMS();
@@ -31,7 +32,6 @@ class OpenFSBRotaryEncoder {
 
 	private:
 		//Methods
-		void  initRotaryEncoder( uint8_t pinA, uint8_t pinB, uint8_t mode, uint8_t onState );
 		void  updateDirection();
 
 		//Attributes

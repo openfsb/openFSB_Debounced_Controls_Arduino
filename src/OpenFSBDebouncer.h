@@ -40,6 +40,7 @@ class OpenFSBDebouncer {
 		OpenFSBDebouncer( uint8_t pin, uint8_t mode, uint8_t onState );
 
 		//Methods
+		void     begin();
 		uint8_t  getOnState();
 		void     setIntervalMS( uint16_t intervalMS );
 		uint16_t getIntervalMS();
@@ -62,7 +63,8 @@ class OpenFSBDebouncer {
 		OpenFSBDebouncer(); // only for friend classes
 
 		//Methods
-		void           initDebouncer( uint8_t pin, uint8_t mode, uint8_t onState );
+		void           setPin( uint8_t pin );
+		void           setMode( uint8_t mode );
 		void           setOnState( uint8_t onState );
 		void           setState( byte bits );
 		void           unsetState( byte bits );
@@ -72,6 +74,7 @@ class OpenFSBDebouncer {
 		unsigned long  getRtimerMS();
 
 		//Attributes
+		bool           pin_set               = false;
 		bool           initialized           = false;
 		uint8_t        pin_number            = 0;
 		uint8_t        pin_value             = HIGH;

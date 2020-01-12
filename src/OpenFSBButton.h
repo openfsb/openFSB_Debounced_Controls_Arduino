@@ -20,6 +20,7 @@ class OpenFSBButton {
 		OpenFSBButton( uint8_t pin, uint8_t mode, uint8_t onState );
 
 		//Methods
+		void     begin();
 		uint8_t  getOnState();
 		void     setIntervalMS( uint16_t intervalMS );
 		uint16_t getIntervalMS();
@@ -36,7 +37,6 @@ class OpenFSBButton {
 
 	private:
 		//Methods
-		void  initButton( uint8_t pin, uint8_t mode, uint8_t onState );
 
 		//Attributes
 		OpenFSBDebouncer  debouncer = OpenFSBDebouncer();

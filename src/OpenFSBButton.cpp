@@ -11,21 +11,29 @@
 
 
 // CONSTRUCTORS
-OpenFSBButton::OpenFSBButton(  uint8_t pin ) {
- 	initButton( pin, debouncer.pin_mode, debouncer.getState( ON_STATE ) );
+OpenFSBButton::OpenFSBButton( uint8_t pin ) {
+  debouncer.setPin( pin );
 }
 
-OpenFSBButton::OpenFSBButton(  uint8_t pin, uint8_t mode ) {
- 	initButton( pin, mode, debouncer.getState( ON_STATE ) );
+OpenFSBButton::OpenFSBButton( uint8_t pin, uint8_t mode ) {
+  debouncer.setPin( pin );
+  debouncer.setMode( mode );
 }
 
 OpenFSBButton::OpenFSBButton( uint8_t pin, uint8_t mode, uint8_t onState ) {
-	initButton( pin, mode, onState );
+  debouncer.setPin( pin );
+  debouncer.setMode( mode );
+  debouncer.setOnState( onState  );
 }
 
 
 
 // METHODS
+void OpenFSBButton::begin() {
+  debouncer.begin();
+}
+
+
 uint8_t OpenFSBButton::getOnState() {
 	return debouncer.getOnState();
 }
@@ -93,6 +101,3 @@ void OpenFSBButton::update() {
 
 
 // PRIVATE METHODS
-void OpenFSBButton::initButton( uint8_t pin, uint8_t mode, uint8_t onState ) {
-	debouncer.initDebouncer( pin, mode, onState );
-}
