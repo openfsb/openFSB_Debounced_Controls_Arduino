@@ -28,21 +28,21 @@ Constructor
 -----------
 OpenFSBRotaryEncoder( pinA, pinB )
  Create OpenFSBRotaryEncoder instance with only the mandatory argument ``pin``.
- 
+
  .. function:: OpenFSBRotaryEncoder::OpenFSBRotaryEncoder( uint8_t pinA, uint8_t pinB )
 
  Arguments:
- 
+
  * pinA: Pin number of pin A. See the board/MCU specifications for the pin numbers.
  * pinB: Pin number of pin B. See the board/MCU specifications for the pin numbers.
 
  Defaults:
- 
+
  * mode: ``PULLUP``
  * onState: ``LOW``
 
  Example:
- 
+
  .. code-block:: c
 
     OpenFSBRotaryEncoder debouncer( 7, 8 );
@@ -50,21 +50,21 @@ OpenFSBRotaryEncoder( pinA, pinB )
 
 OpenFSBRotaryEncoder( pinA, pinB, mode )
  Create OpenFSBRotaryEncoder instance with custom ``mode``.
- 
+
  .. function:: OpenFSBRotaryEncoder::OpenFSBRotaryEncoder( uint8_t pinA, uint8_t pinB, uint8_t mode )
 
  Arguments:
- 
+
  * pinA: Pin number of pin A. See the board/MCU specifications for the pin numbers.
  * pinB: Pin number of pin B. See the board/MCU specifications for the pin numbers.
  * mode: ``PULLUP`` or ``PULLDOWN``. ``EXTERNAL`` is also posible here. In that case ``onState`` is left default (``LOW``). Best way is to specity the onState explicitely when mode is ``EXTERNAL``.
 
  Defaults:
- 
+
  * onState: ``LOW`` when mode is ``PULLUP`` or ``EXTERNAL``, ``HIGH`` when mode is ``PULLDOWN``
 
  Example:
- 
+
  .. code-block:: c
 
     OpenFSBRotaryEncoder debouncer( 7, 8, PULLUP );
@@ -72,22 +72,22 @@ OpenFSBRotaryEncoder( pinA, pinB, mode )
 
 OpenFSBRotaryEncoder( pinA, pinB, mode, onState )
  Create OpenFSBRotaryEncoder instance with custom ``mode`` and ``onState``.
- 
+
  .. function:: OpenFSBRotaryEncoder::OpenFSBRotaryEncoder( uint8_t pinA, uint8_t pinB, uint8_t mode, uint8_t onState )
 
  Arguments:
- 
+
  * pinA: Pin number of pin A. See the board/MCU specifications for the pin numbers.
  * pinB: Pin number of pin B. See the board/MCU specifications for the pin numbers.
  * mode: ``EXTERNAL``. ``PULLUP`` and ``PULLDOWN`` are also possible here, but in that case the value of the onState parameter is ignored and onState will be set automatically according to the mode.
- * onState: the `on` state value ``LOW`` or ``HIGH`` (ignored when mode is ``PULLUP`` or ``PULLDOWN``) 
+ * onState: the `on` state value ``LOW`` or ``HIGH`` (ignored when mode is ``PULLUP`` or ``PULLDOWN``)
 
  Defaults:
- 
+
  * onState: ``LOW`` when mode is ``PULLUP``, ``HIGH`` when mode is ``PULLDOWN``
- 
+
  Example:
- 
+
  .. code-block:: c
 
     OpenFSBRotaryEncoder debouncer( 7, 8, EXTERNAL, LOW );
@@ -98,15 +98,27 @@ OpenFSBRotaryEncoder( pinA, pinB, mode, onState )
 Methods
 -------
 
+begin()
+ Start de rotary encoder. Should be called once before ``update()`` and ``read()``.
+
+ .. function:: uint8_t OpenFSBRotaryEncoder::begin()
+
+ Example:
+
+ .. code-block:: c
+
+     encoder.begin();
+
+
 getOnState()
  Get the actual `on` state value.
 
  .. function:: uint8_t OpenFSBRotaryEncoder::getOnState()
 
  Returns: the actual `on` state value ``LOW`` or ``HIGH``.
- 
+
  Example:
- 
+
  .. code-block:: c
 
      uint8_t val = encoder.getOnState();
@@ -119,17 +131,17 @@ setIntervalMS( intervalMS )
  .. function:: void OpenFSBRotaryEncoder::setIntervalMS( uint16_t intervalMS )
 
  Arguments:
- 
+
  * intervalMS: the stable interval time in milliseconds.
 
  Example:
- 
+
  .. code-block:: c
 
      encoder.setIntervalMS( 3 );
 
  .. note::
-   
+
    The stable interval time is different from some other solutions. This stable interval time is the time to detect the control is not debouncing anymore and starts after the last bounce. Therefore this time should be quite short.
 
 
@@ -141,7 +153,7 @@ getIntervalMS()
  Returns: the stable interval time in milliseconds.
 
  Example:
- 
+
  .. code-block:: c
 
      uint16_t val = encoder.getIntervalMS();
@@ -155,7 +167,7 @@ getDirection()
  Returns: 1 if turned clockwise, -1 if turned counterclockwise, 0 if not turned
 
  Example:
- 
+
  .. code-block:: c
 
      int val = encoder.getDirection();
@@ -169,7 +181,7 @@ rotatingCW()
  Returns: ``true`` or ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = encoder.rotatingCW();
@@ -183,7 +195,7 @@ rotatingCCW()
  Returns: ``true`` or ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = encoder.rotatingCCW();
@@ -195,7 +207,7 @@ update()
  .. function:: void OpenFSBRotaryEncoder::update()
 
  Example:
- 
+
  .. code-block:: c
 
      encoder.update();
@@ -209,7 +221,7 @@ read()
  Returns: new counter
 
  Example:
- 
+
  .. code-block:: c
 
      long val encoder.read();
@@ -239,7 +251,8 @@ Using methods rotatingCW and rotatingCCW:
 
 
     void setup() {
-	  Serial.begin( 115200 );
+      Serial.begin( 115200 );
+      encoder.begin();
     }
 
 
@@ -266,7 +279,8 @@ Using method getDirection:
 
 
     void setup() {
-	  Serial.begin( 115200 );
+      Serial.begin( 115200 );
+      encoder.begin();
     }
 
 
@@ -292,12 +306,13 @@ Using counter
     #define ENCODER_PIN_B   3
 
     OpenFSBRotaryEncoder encoder( ENCODER_PIN_A, ENCODER_PIN_B );  // Defaults: mode=PULLUP, onState=LOW
-	
+
     long lastCounter = 0;
 
 
     void setup() {
-	  Serial.begin( 115200 );
+      Serial.begin( 115200 );
+      encoder.begin();
     }
 
 
@@ -312,5 +327,3 @@ Using counter
         Serial.println( "Turned counterclockwise" );
       }
     }
-
-

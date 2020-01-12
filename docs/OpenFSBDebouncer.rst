@@ -1,7 +1,7 @@
 Class OpenFSBDebouncer
 ======================
 
-The OpenFSBDebouncer is debouncing pin input, so one action results in one change event instead of many caused by bouncing contacts. OpenFSBDebouncer is the base class of this library and used in all other classes in this library but can also be used stand-alone. OpenFSBDebouncer can be used in two modes: absolute or relative. In `absolute mode`_ the status is equal to the fysical pin status. This is the technical way. In `relative mode`_ the pin status is compared with the setting ``onState`` to know if the state is `on` or `off`. This is the natural way. Both modes work well and it's up to you which one you prefer to use. If you don't know, use the relative mode to keep things easy. 
+The OpenFSBDebouncer is debouncing pin input, so one action results in one change event instead of many caused by bouncing contacts. OpenFSBDebouncer is the base class of this library and used in all other classes in this library but can also be used stand-alone. OpenFSBDebouncer can be used in two modes: absolute or relative. In `absolute mode`_ the status is equal to the fysical pin status. This is the technical way. In `relative mode`_ the pin status is compared with the setting ``onState`` to know if the state is `on` or `off`. This is the natural way. Both modes work well and it's up to you which one you prefer to use. If you don't know, use the relative mode to keep things easy.
 
 
 Absolute mode methods:
@@ -43,20 +43,20 @@ Constructor
 -----------
 OpenFSBDebouncer( pin )
  Create OpenFSBDebouncer instance with only the mandatory argument ``pin``.
- 
+
  .. function:: OpenFSBDebouncer::OpenFSBDebouncer( uint8_t pin )
 
  Arguments:
- 
+
  * pin: Pin number the control is connected to. See the board/MCU specifications for the pin numbers.
 
  Defaults:
- 
+
  * mode: ``PULLUP``
  * onState: ``LOW``
 
  Example:
- 
+
  .. code-block:: c
 
     OpenFSBDebouncer debouncer( 7 );
@@ -64,20 +64,20 @@ OpenFSBDebouncer( pin )
 
 OpenFSBDebouncer( pin, mode )
  Create OpenFSBDebouncer instance with custom ``mode``.
- 
+
  .. function:: OpenFSBDebouncer::OpenFSBDebouncer( uint8_t pin, uint8_t mode )
 
  Arguments:
- 
+
  * pin: Pin number the control is connected to. See the board/MCU specifications for the pin numbers.
  * mode: ``PULLUP`` or ``PULLDOWN``. ``EXTERNAL`` is also posible here. In that case ``onState`` is left default (``LOW``). Best way is to specity the onState explicitely when mode is ``EXTERNAL``.
 
  Defaults:
- 
+
  * onState: ``LOW`` when mode is ``PULLUP`` or ``EXTERNAL``, ``HIGH`` when mode is ``PULLDOWN``
 
  Example:
- 
+
  .. code-block:: c
 
     OpenFSBDebouncer debouncer( 7, PULLUP );
@@ -85,21 +85,21 @@ OpenFSBDebouncer( pin, mode )
 
 OpenFSBDebouncer( pin, mode, onState )
  Create OpenFSBDebouncer instance with custom ``mode`` and ``onState``.
- 
+
  .. function:: OpenFSBDebouncer::OpenFSBDebouncer( uint8_t pin, uint8_t mode, uint8_t onState )
 
  Arguments:
- 
+
  * pin: Pin number the control is connected to. See the board/MCU specifications for the pin numbers.
  * mode: ``EXTERNAL``. ``PULLUP`` and ``PULLDOWN`` are also possible here, but in that case the value of the onState parameter is ignored and onState will be set automatically according to the mode.
- * onState: the `on` state value ``LOW`` or ``HIGH`` (ignored when mode is ``PULLUP`` or ``PULLDOWN``) 
+ * onState: the `on` state value ``LOW`` or ``HIGH`` (ignored when mode is ``PULLUP`` or ``PULLDOWN``)
 
  Defaults:
- 
+
  * onState: ``LOW`` when mode is ``PULLUP``, ``HIGH`` when mode is ``PULLDOWN``
- 
+
  Example:
- 
+
  .. code-block:: c
 
     OpenFSBDebouncer debouncer( 7, EXTERNAL, LOW );
@@ -128,19 +128,30 @@ Comparison
 Methods
 -------
 
+begin()
+ Start de debouncer. Should be called once before ``update()``.
+
+ .. function:: uint8_t OpenFSBDebouncer::begin()
+
+ Example:
+
+ .. code-block:: c
+
+     debouncer.begin();
+
+
 getOnState()
  Get the actual `on` state value.
 
  .. function:: uint8_t OpenFSBDebouncer::getOnState()
 
  Returns: the actual `on` state value ``LOW`` or ``HIGH``.
- 
+
  Example:
- 
+
  .. code-block:: c
 
      uint8_t val = debouncer.getOnState();
-
 
 
 setIntervalMS( intervalMS )
@@ -149,17 +160,17 @@ setIntervalMS( intervalMS )
  .. member:: void OpenFSBDebouncer::setIntervalMS( uint16_t intervalMS )
 
  Arguments:
- 
+
  * intervalMS: the stable interval time in milliseconds.
 
  Example:
- 
+
  .. code-block:: c
 
      debouncer.setIntervalMS( 3 );
 
  .. note::
-   
+
    The stable interval time is different from some other solutions. This stable interval time is the time to detect the control is not debouncing anymore and starts after the last bounce. Therefore this time should be quite short.
 
 
@@ -171,7 +182,7 @@ getIntervalMS()
  Returns: the stable interval time in milliseconds.
 
  Example:
- 
+
  .. code-block:: c
 
      uint16_t val = debouncer.getIntervalMS();
@@ -183,9 +194,9 @@ getValue()
  .. function:: int OpenFSBDebouncer::getValue()
 
  Returns: the debounced pin state ``LOW`` or ''HIGH``.
- 
+
  Example:
- 
+
  .. code-block:: c
 
      int val = debouncer.getValue();
@@ -199,7 +210,7 @@ switchingOn()
  Returns: ``true`` or ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = debouncer.switchingOn();
@@ -213,7 +224,7 @@ switchingOff()
  Returns: ``true`` or ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = debouncer.switchingOff();
@@ -227,7 +238,7 @@ switching()
  Returns: ``true`` or ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = debouncer.switching();
@@ -241,7 +252,7 @@ isOn()
  Returns: ``true`` if ``onState`` and the debounced state are equal otherwise ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = debouncer.isOn();
@@ -255,7 +266,7 @@ isOff()
  Returns: ``true`` if ``onState`` and the debounced state are not equal otherwise ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = debouncer.isOff();
@@ -267,9 +278,9 @@ rose()
  .. function:: bool OpenFSBDebouncer::rose()
 
  Returns: ``true`` or ``false``
- 
+
  Example:
- 
+
  .. code-block:: c
 
      bool val = debouncer.rose();
@@ -283,7 +294,7 @@ fell()
  Returns: ``true`` or ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = debouncer.fell();
@@ -297,7 +308,7 @@ isLow()
  Returns: ``true`` or ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = debouncer.isLow();
@@ -311,7 +322,7 @@ isHigh()
  Returns: ``true`` or ``false``
 
  Example:
- 
+
  .. code-block:: c
 
      bool val = debouncer.isHigh();
@@ -323,7 +334,7 @@ update()
  .. function:: void OpenFSBDebouncer::update()
 
  Example:
- 
+
  .. code-block:: c
 
      debouncer.update();
@@ -351,6 +362,7 @@ When you use a pull-up resistor, you code should be like this:
     void setup() {
       pinMode(LED_BUILTIN, OUTPUT);
       digitalWrite(LED_BUILTIN, LOW);
+      debouncer.begin();
     }
 
 
@@ -380,6 +392,7 @@ When you use a pull-down resistor, you have to change ``fell()`` and ``rose()``:
     void setup() {
       pinMode(LED_BUILTIN, OUTPUT);
       digitalWrite(LED_BUILTIN, LOW);
+      debouncer.begin();
     }
 
 
@@ -413,6 +426,7 @@ When you use a pull-up resistor your code will look like this:
     void setup() {
       pinMode(LED_BUILTIN, OUTPUT);
       digitalWrite(LED_BUILTIN, LOW);
+      debouncer.begin();
     }
 
 
@@ -444,7 +458,8 @@ When you use a pull-down resistor you only have to set a different ``onState``. 
     void setup() {
       pinMode(LED_BUILTIN, OUTPUT);
       digitalWrite(LED_BUILTIN, LOW);
-    }
+      debouncer.begin();
+  }
 
 
     void loop() {
